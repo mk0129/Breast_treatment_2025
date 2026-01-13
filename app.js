@@ -845,6 +845,9 @@ function goBack() {
         const previousAnswer = state.answers.pop();
         state.currentQuestion = previousAnswer.questionId;
         state.step--;
+        
+        // Ensure we are on the decision screen (important when coming from result screen)
+        showScreen('decision');
         renderQuestion();
     }
 }
@@ -862,7 +865,7 @@ function restart() {
 // =========================================
 function initEventListeners() {
     elements.backBtn.addEventListener('click', goBack);
-    elements.resultBackBtn.addEventListener('click', restart);
+    elements.resultBackBtn.addEventListener('click', goBack); // Changed from restart to goBack
     elements.restartBtn.addEventListener('click', restart);
 }
 
